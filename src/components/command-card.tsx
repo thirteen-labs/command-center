@@ -1,7 +1,7 @@
 import { Link } from 'expo-router';
-import { SymbolView } from 'expo-symbols';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
@@ -32,13 +32,13 @@ export function CommandCard({ command }: CommandCardProps) {
           </ThemedText>
           <View style={styles.meta}>
             <View style={styles.metaItem}>
-              <SymbolView name={command.category_icon as any} size={10} tintColor={theme.textSecondary} />
+              <Icon name={command.category_icon ?? ''} size={10} color={theme.textSecondary} />
               <ThemedText type="small" themeColor="textSecondary">
                 {command.category_name}
               </ThemedText>
             </View>
             <View style={styles.metaItem}>
-              <SymbolView name={command.platform_icon as any} size={10} tintColor={theme.textSecondary} />
+              <Icon name={command.platform_icon ?? ''} size={10} color={theme.textSecondary} />
               <ThemedText type="small" themeColor="textSecondary">
                 {command.platform_name}
               </ThemedText>

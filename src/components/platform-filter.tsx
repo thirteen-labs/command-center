@@ -1,6 +1,6 @@
-import { SymbolView } from 'expo-symbols';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -35,7 +35,7 @@ export function PlatformFilter({ selected, onSelect }: PlatformFilterProps) {
             ]}
             onPress={() => onSelect(p.id === selected ? null : p.id)}
           >
-            <SymbolView name={p.icon as any} size={12} tintColor={isActive ? theme.background : theme.textSecondary} />
+            <Icon name={p.icon} size={12} color={isActive ? theme.background : theme.textSecondary} />
             <ThemedText
               type="small"
               themeColor={isActive ? 'background' : 'textSecondary'}

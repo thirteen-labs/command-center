@@ -1,6 +1,6 @@
-import { SymbolView } from 'expo-symbols';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
+import { Icon } from '@/components/icon';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -15,7 +15,7 @@ export function SearchBar({ value, onChangeText, placeholder = 'Search commands.
 
   return (
     <View style={[styles.container, { backgroundColor: theme.backgroundElement }]}>
-      <SymbolView name={'magnifyingglass' as any} size={16} tintColor={theme.textSecondary} />
+      <Icon name="magnifyingglass" size={16} color={theme.textSecondary} />
       <TextInput
         style={[styles.input, { color: theme.text }]}
         value={value}
@@ -28,7 +28,7 @@ export function SearchBar({ value, onChangeText, placeholder = 'Search commands.
       />
       {value.length > 0 && (
         <Pressable onPress={() => onChangeText('')}>
-          <SymbolView name={'xmark.circle.fill' as any} size={16} tintColor={theme.textSecondary} />
+          <Icon name="xmark.circle.fill" size={16} color={theme.textSecondary} />
         </Pressable>
       )}
     </View>

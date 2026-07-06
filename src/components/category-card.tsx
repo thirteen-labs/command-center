@@ -1,7 +1,7 @@
 import { Link } from 'expo-router';
-import { SymbolView } from 'expo-symbols';
 import { Pressable, StyleSheet } from 'react-native';
 
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
@@ -19,7 +19,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
     <Link href={`/?category=${category.id}`} asChild>
       <Pressable style={({ pressed }) => pressed && styles.pressed}>
         <ThemedView type="backgroundElement" style={styles.card}>
-          <SymbolView name={category.icon as any} size={24} tintColor={theme.text} />
+          <Icon name={category.icon} size={24} color={theme.text} />
           <ThemedText type="small" style={styles.name}>
             {category.name}
           </ThemedText>

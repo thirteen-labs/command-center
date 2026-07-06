@@ -1,8 +1,11 @@
+import * as Clipboard from 'expo-clipboard';
+import * as Haptics from 'expo-haptics';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { SymbolView } from 'expo-symbols';
+import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
@@ -15,6 +18,7 @@ export default function CommandDetailScreen() {
   const theme = useTheme();
   const command = useCommandById(Number(id));
   const toggleFavorite = useToggleFavorite();
+  const [copied, setCopied] = useState(false);
 
   if (!command) {
     return (
@@ -25,7 +29,15 @@ export default function CommandDetailScreen() {
   }
 
   const handleFavorite = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     toggleFavorite(command.id, command.is_favorite === 1);
+  };
+
+  const handleCopy = async () => {
+    await Clipboard.setStringAsync(command.command);
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -35,10 +47,11 @@ export default function CommandDetailScreen() {
           title: command.command,
           headerRight: () => (
             <Pressable onPress={handleFavorite} style={styles.favButton}>
-              <SymbolView
-                name={(command.is_favorite ? 'star.fill' : 'star') as any}
+              <Icon
+                name={'star.fill'}
                 size={20}
-                tintColor={command.is_favorite ? '#FFD700' : theme.textSecondary}
+                color={command.is_favorite ? '#FFD700' : theme.textSecondary}
+                variant={command.is_favorite ? 'Bold' : 'Linear'}
               />
             </Pressable>
           ),
@@ -59,9 +72,15 @@ export default function CommandDetailScreen() {
             {command.command}
           </ThemedText>
           <Pressable
+            onPress={handleCopy}
             style={[styles.copyButton, { backgroundColor: theme.background }]}
           >
-            <SymbolView name={'doc.on.doc' as any} size={14} tintColor={theme.text} />
+            <Icon
+              name={copied ? 'star.fill' : 'doc.on.doc'}
+              size={14}
+              color={copied ? '#34C759' : theme.text}
+              variant={copied ? 'Bold' : 'Linear'}
+            />
           </Pressable>
         </ThemedView>
 
@@ -69,13 +88,13 @@ export default function CommandDetailScreen() {
 
         <View style={styles.tags}>
           <ThemedView type="backgroundElement" style={styles.tag}>
-            <SymbolView name={command.category_icon as any} size={12} tintColor={theme.textSecondary} />
+            <Icon name={command.category_icon ?? ''} size={12} color={theme.textSecondary} />
             <ThemedText type="small" themeColor="textSecondary">
               {command.category_name}
             </ThemedText>
           </ThemedView>
           <ThemedView type="backgroundElement" style={styles.tag}>
-            <SymbolView name={command.platform_icon as any} size={12} tintColor={theme.textSecondary} />
+            <Icon name={command.platform_icon ?? ''} size={12} color={theme.textSecondary} />
             <ThemedText type="small" themeColor="textSecondary">
               {command.platform_name}
             </ThemedText>
