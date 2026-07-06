@@ -58,11 +58,8 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Make Gradle script executable
-        run: chmod +x android/gradlew
-
       - name: Build debug APK
-        run: cd android && ./gradlew assembleDebug
+        run: npx expo run:android --no-build-cache
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
