@@ -76,7 +76,7 @@ export default function CommandDetailScreen() {
             style={[styles.copyButton, { backgroundColor: theme.background }]}
           >
             <Icon
-              name={copied ? 'star.fill' : 'doc.on.doc'}
+              name={copied ? 'checkmark.circle.fill' : 'doc.on.doc'}
               size={14}
               color={copied ? '#34C759' : theme.text}
               variant={copied ? 'Bold' : 'Linear'}

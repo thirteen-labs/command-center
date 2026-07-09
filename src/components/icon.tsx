@@ -3,9 +3,9 @@ import {
   ExternalDrive, ArchiveBox, Box1,
   Command, Setting2, Data, Monitor, Edit, RowVertical,
   Export, Code, Profile2User, Clock, Key, DocumentText, Apple,
-  Mobile, CloseCircle, Filter, SearchNormal1, Star,
+  Mobile,   CloseCircle, Filter, SearchNormal1, Star,
   DocumentCopy, ArrowRight, ExportSquare, Link,
-  Hierarchy3, CommandSquare, Element,
+  Hierarchy3, CommandSquare, Element, TickCircle,
   type Icon as IconType,
 } from 'iconsax-react-nativejs';
 
@@ -50,6 +50,7 @@ const iconMap: Record<string, IconType> = {
   chevron_right: ArrowRight,
   'arrow.up.right.square': ExportSquare,
   link: Link,
+  'checkmark.circle.fill': TickCircle,
 };
 
 interface Props {

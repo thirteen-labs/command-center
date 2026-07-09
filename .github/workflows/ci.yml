@@ -56,13 +56,23 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
+
+      - name: Gradle Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Make Gradle script executable
         run: chmod +x android/gradlew
 
       - name: Build debug APK
-        run: cd android && ./gradlew assembleDebug
+        run: ./gradlew assembleDebug
+        working-directory: android
         env:
           EXPO_NO_METRO_WATCH: 1
 

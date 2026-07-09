@@ -31,7 +31,7 @@ export default function AppTabs() {
       <NativeTabs.Trigger name="favorites">
         <NativeTabs.Trigger.Label>Favorites</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
+          src={require('@/assets/images/tabIcons/favorites.png')}
           renderingMode="template"
         />
       </NativeTabs.Trigger>
