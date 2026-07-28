@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "command_center",
+    "name": "Command Center",
     "slug": "commandX",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,9 +8,11 @@
     "scheme": "commandcenter",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/images/icon.png",
+      "supportsTablet": true
     },
     "android": {
+      "package": "com.commandcenter.app",
       "adaptiveIcon": {
         "backgroundColor": "#020111",
         "foregroundImage": "./assets/images/icon.png",
@@ -25,14 +27,11 @@
     },
     "plugins": [
       ["expo-router", { "root": "./src/app" }],
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#01000e",
-          "image": "./assets/images/green.png",
-          "imageWidth": 76
-        }
-      ],
+      ["expo-splash-screen", {
+        "backgroundColor": "#01000e",
+        "image": "./assets/images/green.png",
+        "imageWidth": 76
+      }],
       "expo-sqlite"
     ],
     "experiments": {

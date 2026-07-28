@@ -8,32 +8,32 @@ import { scheduleOnRN } from 'react-native-worklets';
 const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 90;
 const DURATION = 600;
 
+const splashKeyframe = new Keyframe({
+  0: {
+    transform: [{ scale: 1 }],
+    opacity: 1,
+  },
+  20: {
+    opacity: 1,
+  },
+  70: {
+    opacity: 0,
+    easing: Easing.elastic(0.7),
+  },
+  100: {
+    opacity: 0,
+    transform: [{ scale: 1 }],
+    easing: Easing.elastic(0.7),
+  },
+});
+
+const SPLASH_IMAGE_SRC = require('@/assets/images/expo-logo.png');
+
 export function AnimatedSplashOverlay() {
   const [animate, setAnimate] = useState(false);
   const [visible, setVisible] = useState(true);
 
   if (!visible) return null;
-
-  const splashKeyframe = new Keyframe({
-    0: {
-      transform: [{ scale: 1 }],
-      opacity: 1,
-    },
-    20: {
-      opacity: 1,
-    },
-    70: {
-      opacity: 0,
-      easing: Easing.elastic(0.7),
-    },
-    100: {
-      opacity: 0,
-      transform: [{ scale: 1 }],
-      easing: Easing.elastic(0.7),
-    },
-  });
-
-  const image = <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />;
 
   return animate ? (
     <Animated.View
@@ -44,7 +44,7 @@ export function AnimatedSplashOverlay() {
         }
       })}
       style={styles.splashOverlay}>
-      {image}
+      <Image style={styles.image} source={SPLASH_IMAGE_SRC} />
     </Animated.View>
   ) : (
     <View
@@ -54,7 +54,7 @@ export function AnimatedSplashOverlay() {
         });
       }}
       style={styles.splashOverlay}>
-      {image}
+      <Image style={styles.image} source={SPLASH_IMAGE_SRC} />
     </View>
   );
 }

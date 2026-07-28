@@ -14,6 +14,7 @@ const iconMap: Record<string, IconType> = {
   gear: Setting,
   cpu: Cpu,
   network: Global,
+  globe: Global,
   shippingbox: Box,
   'text.alignleft': TextalignLeft,
   lock: Lock,

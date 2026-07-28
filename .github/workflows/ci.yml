@@ -38,19 +38,14 @@ jobs:
   apk:
     name: Build APK
     runs-on: ubuntu-latest
+    needs: [lint, typecheck]
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '>=22'
+          node-version: 22
           cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Prebuild Android project
-        run: npx expo prebuild --platform android --no-install
 
       - uses: actions/setup-java@v5
         with:
@@ -67,11 +62,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prebuild Android project
+        run: npx expo prebuild --platform android --non-interactive
+
       - name: Make Gradle script executable
         run: chmod +x android/gradlew
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug
+      - name: Build release APK
+        run: ./gradlew assembleRelease
         working-directory: android
         env:
           EXPO_NO_METRO_WATCH: 1
@@ -80,4 +81,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: android/app/build/outputs/apk/debug/*.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
