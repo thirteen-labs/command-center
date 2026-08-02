@@ -26,13 +26,22 @@
       "favicon": "./assets/images/white.png"
     },
     "plugins": [
-      ["expo-router", { "root": "./src/app" }],
-      ["expo-splash-screen", {
-        "backgroundColor": "#01000e",
-        "image": "./assets/images/green.png",
-        "imageWidth": 76
-      }],
-      "expo-sqlite"
+      [
+        "expo-router",
+        {
+          "root": "./src/app"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#01000e",
+          "image": "./assets/images/green.png",
+          "imageWidth": 76
+        }
+      ],
+      "expo-sqlite",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
