@@ -47,9 +47,6 @@ export default function HomeScreen() {
         renderItem={renderItem}
         ListHeaderComponent={
           <ThemedView style={styles.header}>
-            <ThemedText type="title" style={styles.title}>
-              Command Center
-            </ThemedText>
             <ThemedText themeColor="textSecondary" style={styles.subtitle}>
               {categoryId
                 ? `Filtered by category`
@@ -90,10 +87,6 @@ const styles = StyleSheet.create({
   header: {
     gap: Spacing.three,
     paddingBottom: Spacing.three,
-  },
-  title: {
-    fontSize: 32,
-    lineHeight: 36,
   },
   subtitle: {
     marginTop: -Spacing.two,

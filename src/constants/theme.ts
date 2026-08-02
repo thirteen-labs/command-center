@@ -1,6 +1,6 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Theme colors for the app. Includes light, dark, and custom themes:
+ * amoled, sepia, paper, midnight, ocean, glass, forest.
  */
 
 import '@/global.css';
@@ -21,6 +21,55 @@ export const Colors = {
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
+  },
+  amoled: {
+    text: '#ffffff',
+    background: '#000000',
+    backgroundElement: '#0a0a0a',
+    backgroundSelected: '#1a1a1a',
+    textSecondary: '#808080',
+  },
+  sepia: {
+    text: '#3B2E1E',
+    background: '#FDF5E6',
+    backgroundElement: '#F5E6D3',
+    backgroundSelected: '#E8D5B7',
+    textSecondary: '#8B7355',
+  },
+  paper: {
+    text: '#1a1a1a',
+    background: '#FAFAF5',
+    backgroundElement: '#F0EDE4',
+    backgroundSelected: '#E0D8C8',
+    textSecondary: '#6B6B6B',
+  },
+  midnight: {
+    text: '#E0E0E0',
+    background: '#0D1117',
+    backgroundElement: '#161B22',
+    backgroundSelected: '#21262D',
+    textSecondary: '#8B949E',
+  },
+  ocean: {
+    text: '#E0F0FF',
+    background: '#0A1628',
+    backgroundElement: '#0F2035',
+    backgroundSelected: '#1A3A5C',
+    textSecondary: '#5B8FA8',
+  },
+  glass: {
+    text: '#ffffff',
+    background: 'rgba(0,0,0,0.0)',
+    backgroundElement: 'rgba(255,255,255,0.08)',
+    backgroundSelected: 'rgba(255,255,255,0.15)',
+    textSecondary: 'rgba(255,255,255,0.6)',
+  },
+  forest: {
+    text: '#E8F0E8',
+    background: '#0F1A0F',
+    backgroundElement: '#1A2E1A',
+    backgroundSelected: '#243824',
+    textSecondary: '#6B8F6B',
   },
 } as const;
 

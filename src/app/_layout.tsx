@@ -4,13 +4,13 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useColorScheme } from 'react-native';
 
 import { initializeDatabase } from '@/data/database';
+import { ThemeProvider as AppThemeProvider } from '@/context/theme-context';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+function RootLayoutContent() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <AppThemeProvider>
       <SQLiteProvider databaseName="cheatsheet.db" onInit={initializeDatabase}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -20,6 +20,16 @@ export default function RootLayout() {
           />
         </Stack>
       </SQLiteProvider>
+    </AppThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <RootLayoutContent />
     </ThemeProvider>
   );
 }
