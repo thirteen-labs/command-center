@@ -1,4 +1,6 @@
 import { Link } from 'expo-router';
+import * as Haptics from 'expo-haptics';
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Icon } from '@/components/icon';
@@ -6,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import type { CommandRow } from '@/hooks/use-commands';
+import { useToggleFavorite } from '@/hooks/use-commands';
 import { useTheme } from '@/hooks/use-theme';
 
 interface CommandCardProps {
@@ -14,14 +17,32 @@ interface CommandCardProps {
 
 export function CommandCard({ command }: CommandCardProps) {
   const theme = useTheme();
+  const toggleFavorite = useToggleFavorite();
+  const [favorite, setFavorite] = useState(command.is_favorite === 1);
+
+  const handleToggleFavorite = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    toggleFavorite(command.id, favorite);
+    setFavorite((prev) => !prev);
+  };
 
   return (
     <Link href={`/commands/${command.id}`} asChild>
       <Pressable style={({ pressed }) => pressed && styles.pressed}>
         <ThemedView type="backgroundElement" style={styles.card}>
-          <ThemedText type="code" style={styles.command}>
-            {command.command}
-          </ThemedText>
+          <View style={styles.topRow}>
+            <ThemedText type="code" style={styles.command}>
+              {command.command}
+            </ThemedText>
+            <Pressable onPress={handleToggleFavorite} hitSlop={8} style={styles.favButton}>
+              <Icon
+                name="star.fill"
+                size={20}
+                color={favorite ? '#FFD700' : theme.textSecondary}
+                variant={favorite ? 'Bold' : 'Linear'}
+              />
+            </Pressable>
+          </View>
           <ThemedText
             type="small"
             themeColor="textSecondary"
@@ -61,6 +82,15 @@ const styles = StyleSheet.create({
   },
   command: {
     fontSize: 15,
+    flex: 1,
+  },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  favButton: {
+    padding: Spacing.half,
   },
   desc: {
     lineHeight: 18,

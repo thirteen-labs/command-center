@@ -8,8 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-import { useCommandById, useToggleFavorite } from '@/hooks/use-commands';
+import { MaxContentWidth, Spacing } from '@/constants/theme';import { useCommandById, useToggleFavorite } from '@/hooks/use-commands';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function CommandDetailScreen() {
@@ -63,7 +62,7 @@ export default function CommandDetailScreen() {
           styles.content,
           {
             paddingTop: Spacing.three,
-            paddingBottom: insets.bottom + BottomTabInset + Spacing.three,
+            paddingBottom: insets.bottom + Spacing.three,
           },
         ]}
       >

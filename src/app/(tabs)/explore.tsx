@@ -26,7 +26,7 @@ export default function ExploreScreen() {
         contentContainerStyle={[
           styles.content,
           {
-            paddingTop: insets.top + Spacing.three,
+            paddingTop: Spacing.three,
             paddingBottom,
           },
         ]}

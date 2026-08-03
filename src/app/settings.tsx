@@ -1,3 +1,4 @@
+import { Stack } from 'expo-router';
 import { FlatList, StyleSheet, Pressable, View } from 'react-native';
 import React from 'react';
 
@@ -60,6 +61,7 @@ export default function SettingsScreen() {
 
   return (
     <ThemedView style={styles.container}>
+      <Stack.Screen options={{ title: 'Settings' }} />
       <FlatList
         contentContainerStyle={styles.content}
         data={themes}
@@ -67,9 +69,6 @@ export default function SettingsScreen() {
         renderItem={renderThemeItem}
         ListHeaderComponent={
           <>
-            <ThemedText type="title" style={styles.screenTitle}>
-              Settings
-            </ThemedText>
             <ThemedText type="smallBold" style={styles.sectionTitle}>
               Theme
             </ThemedText>
@@ -116,11 +115,8 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: Spacing.three,
-    paddingTop: Spacing.two,
+    paddingTop: Spacing.three,
     paddingBottom: Spacing.six,
-  },
-  screenTitle: {
-    marginBottom: Spacing.three,
   },
   sectionTitle: {
     fontSize: 14,

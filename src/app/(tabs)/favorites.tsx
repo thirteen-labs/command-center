@@ -28,7 +28,7 @@ export default function FavoritesScreen() {
         contentContainerStyle={[
           styles.content,
           {
-            paddingTop: insets.top + Spacing.three,
+            paddingTop: Spacing.three,
             paddingBottom,
           },
         ]}
