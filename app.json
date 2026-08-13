@@ -29,7 +29,11 @@
       [
         "expo-router",
         {
-          "root": "./src/app"
+          "root": "./src/app",
+          "headers": {
+            "Cross-Origin-Embedder-Policy": "credentialless",
+            "Cross-Origin-Opener-Policy": "same-origin"
+          }
         }
       ],
       [

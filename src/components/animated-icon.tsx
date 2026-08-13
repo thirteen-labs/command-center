@@ -1,12 +1,16 @@
 import { Image } from 'expo-image';
 import * as SplashScreen from 'expo-splash-screen';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated, { Easing, Keyframe } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
 const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 90;
 const DURATION = 600;
+// Safety net: if the entering animation callback never fires (e.g. reduced
+// motion disables layout animations), still remove the overlay so the app
+// never gets stuck on the splash screen.
+const FALLBACK_TIMEOUT = DURATION + 600;
 
 const splashKeyframe = new Keyframe({
   0: {
@@ -32,6 +36,11 @@ const SPLASH_IMAGE_SRC = require('@/assets/images/expo-logo.png');
 export function AnimatedSplashOverlay() {
   const [animate, setAnimate] = useState(false);
   const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(false), FALLBACK_TIMEOUT);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!visible) return null;
 
