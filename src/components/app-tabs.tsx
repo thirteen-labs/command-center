@@ -13,18 +13,35 @@ import { useThemeColor } from '@/context/theme-context';
 import { Spacing } from '@/constants/theme';
 
 export default function AppTabs() {
+  const colors = useThemeColor();
+
   return (
     <Tabs>
       <TabSlot style={{ height: '100%' }} />
       <TabList asChild>
-        <CustomTabList />
+        <CustomTabList>
+          <TabTrigger name="index" href="/" asChild>
+            <TabButton colors={colors}>
+              <Icon name="magnifyingglass" size={24} color={colors.text} />
+            </TabButton>
+          </TabTrigger>
+          <TabTrigger name="explore" href="/explore" asChild>
+            <TabButton colors={colors}>
+              <Icon name="command" size={24} color={colors.text} />
+            </TabButton>
+          </TabTrigger>
+          <TabTrigger name="favorites" href="/favorites" asChild>
+            <TabButton colors={colors}>
+              <Icon name="star.fill" size={24} color={colors.text} />
+            </TabButton>
+          </TabTrigger>
+        </CustomTabList>
       </TabList>
     </Tabs>
   );
 }
 
 function CustomTabList(props: { children?: React.ReactNode }) {
-  const colors = useThemeColor();
   const insets = useSafeAreaInsets();
 
   return (
@@ -34,21 +51,7 @@ function CustomTabList(props: { children?: React.ReactNode }) {
         styles.tabListContainer,
         { bottom: insets.bottom + Spacing.two },
       ]}>
-      <TabTrigger name="index" href="/" asChild>
-        <TabButton colors={colors}>
-          <Icon name="magnifyingglass" size={24} color={colors.text} />
-        </TabButton>
-      </TabTrigger>
-      <TabTrigger name="explore" href="/explore" asChild>
-        <TabButton colors={colors}>
-          <Icon name="command" size={24} color={colors.text} />
-        </TabButton>
-      </TabTrigger>
-      <TabTrigger name="favorites" href="/favorites" asChild>
-        <TabButton colors={colors}>
-          <Icon name="star.fill" size={24} color={colors.text} />
-        </TabButton>
-      </TabTrigger>
+      {props.children}
     </View>
   );
 }
