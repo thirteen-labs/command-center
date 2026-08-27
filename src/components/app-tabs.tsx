@@ -43,6 +43,7 @@ export default function AppTabs() {
 
 function CustomTabList(props: { children?: React.ReactNode }) {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColor();
 
   return (
     <View
@@ -52,6 +53,11 @@ function CustomTabList(props: { children?: React.ReactNode }) {
         { bottom: insets.bottom + Spacing.two },
       ]}>
       {props.children}
+      <TabTrigger name="settings" href="/settings" asChild>
+        <TabButton colors={colors}>
+          <Icon name="gear" size={24} color={colors.text} />
+        </TabButton>
+      </TabTrigger>
     </View>
   );
 }
@@ -81,7 +87,10 @@ const styles = StyleSheet.create({
   tabListContainer: {
     position: 'absolute',
     alignSelf: 'center',
+    left: '1%',
+    width: '98%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'rgba(0,0,0,0.25)',
     borderRadius: 999,
     paddingHorizontal: 12,

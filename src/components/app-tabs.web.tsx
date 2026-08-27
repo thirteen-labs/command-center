@@ -41,6 +41,11 @@ function CustomTabList(props: { children?: React.ReactNode }) {
           <Icon name="star.fill" size={24} color={colors.text} />
         </TabButton>
       </TabTrigger>
+      <TabTrigger name="settings" href="/settings" asChild>
+        <TabButton>
+          <Icon name="gear" size={24} color={colors.text} />
+        </TabButton>
+      </TabTrigger>
     </View>
   );
 }
@@ -65,7 +70,10 @@ const styles = StyleSheet.create({
   tabListContainer: {
     position: 'absolute',
     alignSelf: 'center',
+    left: '1%',
+    width: '98%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'rgba(0,0,0,0.25)',
     borderRadius: 999,
     paddingHorizontal: 12,

@@ -15,8 +15,8 @@ export function Header() {
       <ThemedText type="subtitle" style={styles.title}>
         Command Center
       </ThemedText>
-      <Pressable onPress={() => router.push('/settings' as any)} style={styles.settingsButton}>
-        <Icon name="setting" size={22} color="currentColor" />
+      <Pressable onPress={() => router.push('/settings' as any)} style={styles.settingsButton} hitSlop={8} accessibilityLabel="Settings" accessibilityRole="button">
+        <Icon name="gear" size={22} color="currentColor" />
       </Pressable>
     </View>
   );
