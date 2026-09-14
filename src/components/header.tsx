@@ -15,7 +15,12 @@ export function Header() {
       <ThemedText type="subtitle" style={styles.title}>
         Command Center
       </ThemedText>
-      <Pressable onPress={() => router.push('/settings' as any)} style={styles.settingsButton} hitSlop={8} accessibilityLabel="Settings" accessibilityRole="button">
+      <Pressable
+        onPress={() => router.push('/settings' as any)}
+        style={[styles.settingsButton, styles.settingsButtonRounded]}
+        hitSlop={8}
+        accessibilityLabel="Settings"
+        accessibilityRole="button">
         <Icon name="gear" size={22} color="currentColor" />
       </Pressable>
     </View>
@@ -29,6 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.three,
     paddingBottom: Spacing.two,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(128, 128, 128, 0.15)',
   },
   title: {
     fontSize: 20,
@@ -36,5 +43,9 @@ const styles = StyleSheet.create({
   },
   settingsButton: {
     padding: Spacing.one,
+  },
+  settingsButtonRounded: {
+    borderRadius: 999,
+    backgroundColor: 'rgba(128, 128, 128, 0.1)',
   },
 });

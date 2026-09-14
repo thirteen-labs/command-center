@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Icon } from '@/components/icon';
@@ -12,9 +13,10 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChangeText, placeholder = 'Search commands...' }: SearchBarProps) {
   const theme = useTheme();
+  const [focused, setFocused] = useState(false);
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.backgroundElement }]}>
+    <View style={[styles.container, { backgroundColor: theme.backgroundElement }, focused && styles.focused]}>
       <Icon name="magnifyingglass" size={16} color={theme.textSecondary} />
       <TextInput
         style={[styles.input, { color: theme.text }]}
@@ -25,9 +27,11 @@ export function SearchBar({ value, onChangeText, placeholder = 'Search commands.
         autoCapitalize="none"
         autoCorrect={false}
         clearButtonMode="while-editing"
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       />
       {value.length > 0 && (
-        <Pressable onPress={() => onChangeText('')}>
+        <Pressable onPress={() => onChangeText('')} accessibilityRole="button" accessibilityLabel="Clear search">
           <Icon name="xmark.circle.fill" size={16} color={theme.textSecondary} />
         </Pressable>
       )}
@@ -43,6 +47,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
     gap: Spacing.two,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  focused: {
+    borderColor: 'rgba(100, 150, 255, 0.4)',
   },
   input: {
     flex: 1,

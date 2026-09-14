@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 
 import { Icon } from '@/components/icon';
@@ -21,20 +22,29 @@ interface PlatformFilterProps {
 
 export function PlatformFilter({ selected, onSelect }: PlatformFilterProps) {
   const theme = useTheme();
+  const [pressedId, setPressedId] = useState<number | null>(null);
 
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scroll}>
       {platforms.map((p) => {
         const isActive = selected === p.id;
+        const isPressed = pressedId === p.id;
         return (
           <Pressable
             key={p.label}
             style={[
               styles.chip,
               { backgroundColor: isActive ? theme.text : theme.backgroundElement },
+              isPressed && styles.chipPressed,
             ]}
-            onPress={() => onSelect(p.id === selected ? null : p.id)}
-          >
+            onPress={() => {
+              setPressedId(p.id);
+              setTimeout(() => setPressedId(null), 100);
+              onSelect(p.id === selected ? null : p.id);
+            }}
+            accessibilityRole="button"
+            accessibilityLabel={`Filter by ${p.label}`}
+            accessibilityState={{ selected: isActive }}>
             <Icon name={p.icon} size={12} color={isActive ? theme.background : theme.textSecondary} />
             <ThemedText
               type="small"
@@ -61,5 +71,10 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one + 2,
     borderRadius: 20,
     marginRight: Spacing.two,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  chipPressed: {
+    opacity: 0.7,
   },
 });

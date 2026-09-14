@@ -44,10 +44,10 @@ function RootLayoutContent() {
     <AppThemeProvider>
       <SQLiteProvider databaseName="cheatsheet.db" onInit={initializeDatabase}>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, statusBarStyle: 'auto' }} />
           <Stack.Screen
             name="commands/[id]"
-            options={{ title: 'Command', presentation: 'card' }}
+            options={{ title: 'Command', presentation: 'card', statusBarStyle: 'auto' }}
           />
         </Stack>
       </SQLiteProvider>

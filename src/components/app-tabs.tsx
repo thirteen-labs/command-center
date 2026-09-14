@@ -20,17 +20,17 @@ export default function AppTabs() {
       <TabSlot style={{ height: '100%' }} />
       <TabList asChild>
         <CustomTabList>
-          <TabTrigger name="index" href="/" asChild>
+          <TabTrigger name="index" href="/" asChild accessibilityLabel="Search">
             <TabButton colors={colors}>
               <Icon name="magnifyingglass" size={24} color={colors.text} />
             </TabButton>
           </TabTrigger>
-          <TabTrigger name="explore" href="/explore" asChild>
+          <TabTrigger name="explore" href="/explore" asChild accessibilityLabel="Commands">
             <TabButton colors={colors}>
               <Icon name="command" size={24} color={colors.text} />
             </TabButton>
           </TabTrigger>
-          <TabTrigger name="favorites" href="/favorites" asChild>
+          <TabTrigger name="favorites" href="/favorites" asChild accessibilityLabel="Favorites">
             <TabButton colors={colors}>
               <Icon name="star.fill" size={24} color={colors.text} />
             </TabButton>
@@ -53,7 +53,7 @@ function CustomTabList(props: { children?: React.ReactNode }) {
         { bottom: insets.bottom + Spacing.two },
       ]}>
       {props.children}
-      <TabTrigger name="settings" href="/settings" asChild>
+      <TabTrigger name="settings" href="/settings" asChild accessibilityLabel="Settings">
         <TabButton colors={colors}>
           <Icon name="gear" size={24} color={colors.text} />
         </TabButton>
@@ -71,7 +71,11 @@ function TabButton({
   return (
     <Pressable
       {...props}
-      style={({ pressed }) => pressed && styles.pressed}>
+      accessibilityRole="tab"
+      style={[
+        styles.pressed,
+        isFocused && styles.tabButtonPressed,
+      ]}>
       <View
         style={[
           styles.tabButtonView,
@@ -111,5 +115,14 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.7,
+    borderRadius: 999,
+    overflow: 'hidden',
+  },
+  tabButtonPressed: {
+    shadowColor: '#000',
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 10,
   },
 });

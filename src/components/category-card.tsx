@@ -17,7 +17,11 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
   return (
     <Link href={`/?category=${category.id}`} asChild>
-      <Pressable style={({ pressed }) => pressed && styles.pressed}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.pressed,
+          pressed && styles.pressedActive,
+        ]}>
         <ThemedView type="backgroundElement" style={styles.card}>
           <Icon name={category.icon} size={24} color={theme.text} />
           <ThemedText type="small" style={styles.name}>
@@ -34,7 +38,12 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
 const styles = StyleSheet.create({
   pressed: {
+    borderRadius: Spacing.three,
+    marginBottom: Spacing.one,
+  },
+  pressedActive: {
     opacity: 0.7,
+    transform: [{ scale: 0.98 }],
   },
   card: {
     borderRadius: Spacing.three,
@@ -43,6 +52,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     minWidth: 140,
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   name: {
     textAlign: 'center',

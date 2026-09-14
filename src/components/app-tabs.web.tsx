@@ -26,22 +26,22 @@ function CustomTabList(props: { children?: React.ReactNode }) {
 
   return (
     <View {...props} style={styles.tabListContainer}>
-      <TabTrigger name="index" href="/" asChild>
+      <TabTrigger name="index" href="/" asChild accessibilityLabel="Search">
         <TabButton>
           <Icon name="magnifyingglass" size={24} color={colors.text} />
         </TabButton>
       </TabTrigger>
-      <TabTrigger name="explore" href="/explore" asChild>
+      <TabTrigger name="explore" href="/explore" asChild accessibilityLabel="Commands">
         <TabButton>
           <Icon name="command" size={24} color={colors.text} />
         </TabButton>
       </TabTrigger>
-      <TabTrigger name="favorites" href="/favorites" asChild>
+      <TabTrigger name="favorites" href="/favorites" asChild accessibilityLabel="Favorites">
         <TabButton>
           <Icon name="star.fill" size={24} color={colors.text} />
         </TabButton>
       </TabTrigger>
-      <TabTrigger name="settings" href="/settings" asChild>
+      <TabTrigger name="settings" href="/settings" asChild accessibilityLabel="Settings">
         <TabButton>
           <Icon name="gear" size={24} color={colors.text} />
         </TabButton>
@@ -54,7 +54,11 @@ function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
   return (
     <Pressable
       {...props}
-      style={({ pressed }) => pressed && styles.pressed}>
+      accessibilityRole="tab"
+      style={[
+        styles.pressed,
+        isFocused && styles.tabButtonPressed,
+      ]}>
       <View
         style={[
           styles.tabButtonView,
@@ -93,5 +97,14 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.7,
+    borderRadius: 999,
+    overflow: 'hidden',
+  },
+  tabButtonPressed: {
+    shadowColor: '#000',
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 10,
   },
 });

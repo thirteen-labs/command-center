@@ -41,7 +41,9 @@ export default function SettingsScreen() {
       <Pressable
         style={[styles.themeItem, isActive && styles.themeItemActive]}
         onPress={() => setTheme(item.name)}
-      >
+        accessibilityRole="radio"
+        accessibilityState={{ selected: isActive }}
+        accessibilityLabel={item.label}>
         <View style={[styles.colorSquare, { backgroundColor: item.colors.background }]}>
           <View style={[styles.colorInner, { backgroundColor: item.colors.backgroundElement }]}>
             <View style={[styles.colorDot, { backgroundColor: item.colors.text }]} />
@@ -89,7 +91,9 @@ export default function SettingsScreen() {
                   key={item.name}
                   style={[styles.fontItem, isActive && styles.fontItemActive]}
                   onPress={() => setSelectedFont(item.name)}
-                >
+                  accessibilityRole="radio"
+                  accessibilityState={{ selected: isActive }}
+                  accessibilityLabel={item.label}>
                   <ThemedText
                     type="small"
                     themeColor={isActive ? 'text' : 'textSecondary'}
@@ -127,10 +131,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.two,
     gap: Spacing.two,
+    borderRadius: Spacing.two,
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   themeItemActive: {
-    opacity: 1,
+    backgroundColor: 'rgba(100, 150, 255, 0.1)',
+    borderColor: 'rgba(100, 150, 255, 0.3)',
   },
   colorSquare: {
     width: 36,
@@ -158,10 +167,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.two,
     gap: Spacing.two,
+    borderRadius: Spacing.two,
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   fontItemActive: {
-    opacity: 1,
+    backgroundColor: 'rgba(100, 150, 255, 0.1)',
+    borderColor: 'rgba(100, 150, 255, 0.3)',
   },
   fontLabel: {
     flex: 1,

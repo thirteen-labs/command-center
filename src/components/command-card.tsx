@@ -28,13 +28,25 @@ export function CommandCard({ command }: CommandCardProps) {
 
   return (
     <Link href={`/commands/${command.id}`} asChild>
-      <Pressable style={({ pressed }) => pressed && styles.pressed}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.pressed,
+          pressed && styles.pressedActive,
+        ]}>
         <ThemedView type="backgroundElement" style={styles.card}>
           <View style={styles.topRow}>
             <ThemedText type="code" style={styles.command}>
               {command.command}
             </ThemedText>
-            <Pressable onPress={handleToggleFavorite} hitSlop={8} style={styles.favButton}>
+            <Pressable
+              onPress={handleToggleFavorite}
+              hitSlop={8}
+              style={[
+                styles.favButton,
+                favorite && styles.favButtonActive,
+              ]}
+              accessibilityRole="button"
+              accessibilityLabel={favorite ? 'Remove from favorites' : 'Add to favorites'}>
               <Icon
                 name="star.fill"
                 size={20}
@@ -73,12 +85,19 @@ export function CommandCard({ command }: CommandCardProps) {
 
 const styles = StyleSheet.create({
   pressed: {
+    borderRadius: Spacing.three,
+    marginBottom: Spacing.one,
+  },
+  pressedActive: {
     opacity: 0.7,
+    transform: [{ scale: 0.98 }],
   },
   card: {
     borderRadius: Spacing.three,
     padding: Spacing.three,
     gap: Spacing.one,
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   command: {
     fontSize: 15,
@@ -91,6 +110,10 @@ const styles = StyleSheet.create({
   },
   favButton: {
     padding: Spacing.half,
+  },
+  favButtonActive: {
+    backgroundColor: 'rgba(255, 215, 0, 0.15)',
+    borderRadius: Spacing.half,
   },
   desc: {
     lineHeight: 18,
